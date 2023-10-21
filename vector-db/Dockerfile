@@ -11,7 +11,7 @@ COPY setup-pgvector.sh setup-pgvector.sh
 RUN sudo chmod ugo+rx setup-pgvector.sh
 
 RUN sudo apt-get -y update \
-    && sudo apt-get -y install git build-essential
+    && sudo apt-get -y install lsb-release git build-essential
 
 #RUN bash setup-pgvector.sh
 

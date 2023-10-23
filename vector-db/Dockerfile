@@ -27,4 +27,5 @@ RUN # Activate pgvector and the database
 RUN echo 'ray ALL=(ALL:ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
 
 COPY vector-db/pg-init.sh /home/ubuntu/pg-init.sh
+RUN sudo chmod ugo+rx /home/ubuntu/pg-init.sh
 CMD /home/ubuntu/pg-init.sh

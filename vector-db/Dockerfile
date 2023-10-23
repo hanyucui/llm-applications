@@ -22,7 +22,7 @@ RUN sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release
 RUN sudo apt update && sudo apt install -y postgresql postgresql-contrib
 RUN # Install pgvector
 RUN sudo apt install -y postgresql-server-dev-15
-RUN pushd /tmp && git clone --branch v0.4.4 https://github.com/pgvector/pgvector.git && pushd pgvector && make && sudo make install && popd && popd
+RUN cd /tmp && git clone --branch v0.4.4 https://github.com/pgvector/pgvector.git && cd pgvector && make && sudo make install
 RUN # Activate pgvector and the database
 RUN echo 'ray ALL=(ALL:ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
 RUN sudo service postgresql start

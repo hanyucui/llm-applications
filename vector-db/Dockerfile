@@ -25,8 +25,6 @@ RUN sudo apt install -y postgresql-server-dev-15
 RUN cd /tmp && git clone --branch v0.4.4 https://github.com/pgvector/pgvector.git && cd pgvector && make && sudo make install
 RUN # Activate pgvector and the database
 RUN echo 'ray ALL=(ALL:ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
-RUN sudo service postgresql start
-RUN # pragma: allowlist nextline secret
-RUN sudo -u postgres psql -c "ALTER USER postgres with password 'postgres';"
-RUN sudo -u postgres psql -c "CREATE EXTENSION vector;"
 
+COPY vector-db/pg-init.sh /home/ubuntu/pg-init.sh
+CMD /home/ubuntu/pg-init.sh

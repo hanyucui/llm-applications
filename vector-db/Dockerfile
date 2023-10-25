@@ -25,6 +25,9 @@ RUN sudo apt install -y postgresql-server-dev-15
 RUN cd /tmp && git clone --branch v0.4.4 https://github.com/pgvector/pgvector.git && cd pgvector && make && sudo make install
 RUN # Activate pgvector and the database
 RUN echo 'ray ALL=(ALL:ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
+RUN echo listen_addresses = \'*\' | sudo tee -a /etc/postgresql/15/main/postgresql.conf
+RUN echo 'host    all             all             0.0.0.0/0            scram-sha-256' \
+    | sudo tee -a /etc/postgresql/15/main/pg_hba.conf
 
 COPY vector-db/pg-init.sh /home/ubuntu/pg-init.sh
 RUN sudo chmod ugo+rx /home/ubuntu/pg-init.sh
